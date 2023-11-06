@@ -26,6 +26,19 @@ class Source {
         return head;
     }
 
+    public static <T> Node<T> reverseListTwo(Node<T> head) {
+        Node<T> prev = null;
+        Node<T> ptr;
+
+        while ( head != null ) {
+            ptr = head.next;
+            head.next = prev;
+            prev = head;
+            head = ptr;
+        }
+        return prev;
+    }
+
     public static void main(String[] args) {
         System.out.println("Example 1: ");
         Node<String> x = new Node<>("x");
@@ -36,6 +49,14 @@ class Source {
         // Printing solution
         Node<String> head = Source.reverseList(x);
 
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
+        }
+
+        Source.reverseList(x); // reverse it back
+        System.out.println("reverseListTwo(): ");
+        head = Source.reverseListTwo(x);
         while (head != null) {
             System.out.println(head.val);
             head = head.next;
@@ -57,6 +78,14 @@ class Source {
         // a -> b -> c -> d -> e -> f
 
         head = Source.reverseList(a); // f -> e -> d -> c -> b -> a
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
+        }
+
+        Source.reverseList(a); // reverse it back
+        head = Source.reverseListTwo(a);
+        System.out.println("reverseListTwo(): ");
         while (head != null) {
             System.out.println(head.val);
             head = head.next;

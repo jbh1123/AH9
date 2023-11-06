@@ -9,39 +9,39 @@ class ECSource {
     public static <T> boolean isOnlyOneUniqueValueList(Node<T> head) {
         var freqMap = new HashMap<T, Integer>();
         var uniqueCount = 0;
-        while ( head != null ) {
+        while (head != null) {
             var currFreq = freqMap.putIfAbsent(head.val, 1);
-            if ( currFreq == null ) { // first time seeing val
+            if (currFreq == null) { // first time seeing val
                 uniqueCount++;  // increment uniqueCount
             } else {    // already saw val, we know it's not unique
-                if ( currFreq == 1 ) {     // this is EXACTLY the second time we're seeing val
+                if (currFreq == 1) {     // this is EXACTLY the second time we're seeing val
                     uniqueCount--;    // decrement uniqueCount SOLELY on the second time we're seeing val
                     freqMap.put(head.val, -1);  // mark that we now know this val is not unique, so we don't
-                                                // decrement uniqueCount again for other occurrences of val
+                    // decrement uniqueCount again for other occurrences of val
                 }
             }
             head = head.next;
         }
-        return uniqueCount==1;
+        return uniqueCount == 1;
     }
 
     public static <T> boolean isUnivalueList(Node<T> head) {
         var set = new HashSet<T>();
-        while ( head != null ) {
+        while (head != null) {
             set.add(head.val);
-            if ( set.size() > 1 ) return false;
+            if (set.size() > 1) return false;
             head = head.next;
         }
-        return (set.size()==1);
+        return (set.size() == 1);   // unnecessary but improves readability (this is always true if we made it here)
     }
 
     public static <T> boolean isUnivalueListRecursive(Node<T> head) {
-        if ( head == null || head.next == null ) return true;
+        if (head == null || head.next == null) return true;
         return head.val == head.next.val && isUnivalueListRecursive(head.next);
     }
 
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("Test 1: ");
         Node<String> z = new Node<>("z");
         // z
